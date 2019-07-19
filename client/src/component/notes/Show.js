@@ -33,7 +33,9 @@ class NoteShow extends React.Component{
                     .then(() => {
                       this.props.history.push('/notes')  
                     })
-                    .catch(err =)
+                    .catch(err =>{
+                        console.log(err)
+                    })
                 }
     }
     handleRemoveTag=(tag) => {
