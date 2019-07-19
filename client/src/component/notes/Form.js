@@ -70,16 +70,16 @@ class Form extends React.Component{
                 // this.setState(() => ({ tags: response.data }))
             })
     }
-    // componentWillReceiveProps(nextProps) {
-    //     console.log(nextProps.note)
-    //     if(Object.keys(nextProps.note.category) > 0){
-    //              this.setState(() => ({
-    //                title: nextProps.note.title,
-    //                body: nextProps.note.body,
-    //               //  category: nextProps.note.category.name
-    //              }));
-    //     }           
-    // }
+    componentWillReceiveProps(nextProps) {
+        console.log(nextProps.note)
+        if(Object.keys(nextProps.note.category) > 0){
+                 this.setState(() => ({
+                   title: nextProps.note.title,
+                   body: nextProps.note.body,
+                  //  category: nextProps.note.category.name
+                 }));
+        }           
+    }
     handleSelectedTag=(tag) => {
         this.setState((prevState) => ({ selectedTags: [...prevState.selectedTags,tag]}))
 
