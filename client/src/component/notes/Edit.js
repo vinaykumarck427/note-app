@@ -17,30 +17,40 @@ class NoteEdit extends React.Component{
 
     componentDidMount(){
         const id = this.props.match.params.id
-        axios.get(`/notes/${id}`, {
+        axios
+          .get(`/notes/${id}`, {
             headers: {
-                'x-auth': localStorage.getItem('userAuthToken')
+              "x-auth": localStorage.getItem("userAuthToken")
             }
-        })
-        .then(response => {
-            console.log(response.data)
-            this.props.dispatch(setNote(response.data))
+          })
+          .then(response => {
+            console.log(response.data);
+            this.props.dispatch(setNote(response.data));
             // this.setState(() => ({selectedTags:response.data.tags}))
-        })
+          })
+          .catch(err => {
+            console.log(err);
+          });
     }
     handleSubmit(formData){
-        axios.put(`/notes/${this.props.note._id}`, formData, {
+        axios
+          .put(`/notes/${this.props.note._id}`, formData, {
             headers: {
-                'x-auth': localStorage.getItem('userAuthToken')
+              "x-auth": localStorage.getItem("userAuthToken")
             }
-        })
-        .then(response => {
-            if(response.data.hasOwnProperty('errors')){
-                console.log(response.data.errors)
-            }else{
-                this.props.history.push(`/notes/${this.props.match.params.id}`)
+          })
+          .then(response => {
+            if (response.data.hasOwnProperty("errors")) {
+              console.log(response.data.errors);
+            } else {
+              this.props.history.push(
+                `/notes/${this.props.match.params.id}`
+              );
             }
-        })
+          })
+          .catch(err => {
+            console.log(err);
+          });
     }
     render(){
         console.log(this.props.note)

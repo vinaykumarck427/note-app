@@ -27,17 +27,21 @@ class ShowCategory extends React.Component{
     }
     handleRemove = () => {
         const id = this.props.match.params.id
-        axios.delete(`/categories/${id}`, {
+        axios
+          .delete(`/categories/${id}`, {
             headers: {
-                'x-auth': localStorage.getItem('userAuthToken')
+              "x-auth": localStorage.getItem("userAuthToken")
             }
-        })
-        .then(response => {
-            const confirm = window.confirm('Are you Sure?')
-            if(confirm){
-                this.props.history.push('/categories')
+          })
+          .then(response => {
+            const confirm = window.confirm("Are you Sure?");
+            if (confirm) {
+              this.props.history.push("/categories");
             }
-        })
+          })
+          .catch(err => {
+            console.log(err);
+          });
     }
     render(){
         return (

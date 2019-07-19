@@ -16,6 +16,9 @@ class UserLogin extends React.Component{
                 this.props.history.push('/users/account')
             }
         })
+        .catch(err => {
+            console.log(err)
+        })
     }
     render(){
         return(

@@ -9,55 +9,74 @@ import { connect } from "react-redux";
 
 class NoteList extends React.Component {
     componentDidMount() {
-        axios.get('/notes', {
+        axios
+          .get("/notes", {
             headers: {
-                'x-auth': localStorage.getItem('userAuthToken')
+              "x-auth": localStorage.getItem("userAuthToken")
             }
-        })
-            .then(response => {
-                this.props.dispatch(setNotes(response.data))
-                // this.setState(() => ({ notes: response.data }))
-            })
+          })
+          .then(response => {
+            this.props.dispatch(setNotes(response.data));
+            // this.setState(() => ({ notes: response.data }))
+          })
+          .catch(err => {
+            console.log(err);
+          });
     }
     handlePin = (id)  => {
-        axios.put(`/notes/${id}`, { isPinned: true }, {
-            headers: {
-                'x-auth': localStorage.getItem('userAuthToken')
+        axios
+          .put(
+            `/notes/${id}`,
+            { isPinned: true },
+            {
+              headers: {
+                "x-auth": localStorage.getItem("userAuthToken")
+              }
             }
-        })
-            .then(response => {
-                        const notes = this.props.notes.map(note => {
-                            if (note._id === response.data._id) {
-                                note.isPinned = response.data.isPinned
-                                return note
-                            } else {
-                                return note
-                            }
-                        })
-                        this.props.dispatch(setNotes(notes)
-                        );
-                        // this.setState(() => ({ notes }))
-                    })             
+          )
+          .then(response => {
+            const notes = this.props.notes.map(note => {
+              if (note._id === response.data._id) {
+                note.isPinned = response.data.isPinned;
+                return note;
+              } else {
+                return note;
+              }
+            });
+            this.props.dispatch(setNotes(notes));
+            // this.setState(() => ({ notes }))
+          })
+          .catch(err => {
+            console.log(err);
+          });            
     }
     handleUnPin = (id) => {
-        axios.put(`/notes/${id}`, { isPinned: false }, {
-            headers: {
-                'x-auth': localStorage.getItem('userAuthToken')
+        axios
+          .put(
+            `/notes/${id}`,
+            { isPinned: false },
+            {
+              headers: {
+                "x-auth": localStorage.getItem("userAuthToken")
+              }
             }
-        })
-            .then(response => {
-                const notes=this.props.notes.map(note => {
-                     if (note._id === response.data._id) {
-                        note.isPinned = response.data.isPinned
-                        return note
-                    }else{
-                        return note
-                    }
-                })
-                this.props.dispatch(setNotes(notes))
+          )
+          .then(response => {
+            const notes = this.props.notes.map(note => {
+              if (note._id === response.data._id) {
+                note.isPinned = response.data.isPinned;
+                return note;
+              } else {
+                return note;
+              }
+            });
+            this.props.dispatch(setNotes(notes));
 
-                // this.setState(() => ({notes}))
-            })
+            // this.setState(() => ({notes}))
+          })
+          .catch(err => {
+            console.log(err);
+          });
     }
 
     handleCopy = (note) => {
@@ -71,26 +90,34 @@ class NoteList extends React.Component {
                 isPinned:note.isPinned
             }
         }
-        axios.post('/notes', newNote, {
+        axios
+          .post("/notes", newNote, {
             headers: {
-                'x-auth': localStorage.getItem('userAuthToken')
+              "x-auth": localStorage.getItem("userAuthToken")
             }
-        })
-        .then(response => {
-            this.props.dispatch(setNote(response.data))
+          })
+          .then(response => {
+            this.props.dispatch(setNote(response.data));
             // this.setState((prevState) => ({notes:[...prevState.notes,response.data]}))
-        })
+          })
+          .catch(err => {
+            console.log(err);
+          });
     }
     handleDelete = (id) => {
-        axios.delete(`/notes/${id}`, {
+        axios
+          .delete(`/notes/${id}`, {
             headers: {
-                'x-auth': localStorage.getItem('userAuthToken')
+              "x-auth": localStorage.getItem("userAuthToken")
             }
-        })
-        .then(response => {
-            this.props.dispatch(removeNote(response.data._id))
-            // this.setState((prevState) => ({notes:prevState.notes.filter(note => note._id !== response.data._id)}))       
-        })
+          })
+          .then(response => {
+            this.props.dispatch(removeNote(response.data._id));
+            // this.setState((prevState) => ({notes:prevState.notes.filter(note => note._id !== response.data._id)}))
+          })
+          .catch(err => {
+            console.log(err);
+          });
     }
     render() {
         console.log(this.props.notes)

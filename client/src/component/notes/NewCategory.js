@@ -4,18 +4,22 @@ import axios from '../../config/config'
 
 class AddCategory extends React.Component{
     handleSubmit = (formData) => {
-        axios.post('/categories', formData, {
+        axios
+          .post("/categories", formData, {
             headers: {
-                'x-auth': localStorage.getItem('userAuthToken')
+              "x-auth": localStorage.getItem("userAuthToken")
             }
-        })
-        .then(response => {
-            if(response.data.hasOwnProperty('errors')){
-                console.log(response.data.errors)
-            }else{
-                this.props.history.push('/categories')
+          })
+          .then(response => {
+            if (response.data.hasOwnProperty("errors")) {
+              console.log(response.data.errors);
+            } else {
+              this.props.history.push("/categories");
             }
-        })
+          })
+          .catch(err => {
+            console.log(err);
+          });
     }
         render(){
         return(

@@ -38,14 +38,19 @@ class NoteShow extends React.Component{
     handleRemoveTag=(tag) => {
         console.log(tag)
         const id = this.props.match.params.id
-        axios.delete(`/notes/removeTag?noteId=${id}&tagId=${tag}`, {
+        axios
+          .delete(`/notes/removeTag?noteId=${id}&tagId=${tag}`, {
             headers: {
-                'x-auth': localStorage.getItem('userAuthToken')
-            }}) 
-        .then(response => {
-            console.log(response.data)
-                this.setState(() => ({note:response.data}))
-        })
+              "x-auth": localStorage.getItem("userAuthToken")
+            }
+          })
+          .then(response => {
+            console.log(response.data);
+            this.setState(() => ({ note: response.data }));
+          })
+          .catch(err => {
+            console.log(err);
+          });
     }
     render(){
         return(

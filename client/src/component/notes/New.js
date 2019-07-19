@@ -15,18 +15,22 @@ class AddNote extends React.Component{
     }
 
     handleSubmit(Data){
-        axios.post('/notes', Data, {
+        axios
+          .post("/notes", Data, {
             headers: {
-                'x-auth': localStorage.getItem('userAuthToken')
+              "x-auth": localStorage.getItem("userAuthToken")
             }
-        })
-            .then(response => {
-                if(response.data.hasOwnProperty('error')){
-                    this.setState(() => ({error:response.data}))
-                }else{
-                    this.props.history.push('/notes')
-                }
-            })
+          })
+          .then(response => {
+            if (response.data.hasOwnProperty("error")) {
+              this.setState(() => ({ error: response.data }));
+            } else {
+              this.props.history.push("/notes");
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          });
     }
         render(){
             return (
