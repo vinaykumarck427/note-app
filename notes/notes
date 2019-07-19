@@ -1,0 +1,25 @@
+1.create a new project called as ticket-master-app
+2.setup express
+3. create necessary folder - app, config
+4. create model - Ticket -
+
+        customer - ObjectId - Ref - Customer
+
+        priority - String
+        isCompleted - Boolean - defalut -false
+        message - String
+        ticketcode - String
+
+    create model - Depatment
+    name - String
+
+    create model - Customers
+        name - String
+        mobile - String
+        email - string
+
+5.create controller - Tickets
+        setup the CRUD operations test it via postman
+
+6. REACT
+

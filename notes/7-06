@@ -1,0 +1,18 @@
+dct-user-auth.herokuapp.com/users/register
+dct-user-auth.herokuapp.com/users/login
+dct-user-auth.herokuapp.com/users/account
+
+400,401 -error status show when server errors
+
+token will pass in axios in second parameter as object with field like
+
+{
+    headers:{
+        'x-auth' :localStorage.setItem('userAuthToken')
+    }
+}
+
+render - attribute
+
+mini projects- url shortner
+
