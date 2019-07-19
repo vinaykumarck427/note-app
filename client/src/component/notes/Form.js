@@ -76,7 +76,7 @@ class Form extends React.Component{
                  this.setState(() => ({
                    title: nextProps.note.title,
                    body: nextProps.note.body,
-                   category: nextProps.note.category.name
+                  //  category: nextProps.note.category.name
                  }));
         }           
     }
