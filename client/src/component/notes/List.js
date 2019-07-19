@@ -21,7 +21,7 @@ class NoteList extends React.Component {
           })
           .catch(err => {
             console.log(err);
-          });
+          })
     }
     handlePin = (id)  => {
         axios
@@ -102,7 +102,7 @@ class NoteList extends React.Component {
           })
           .catch(err => {
             console.log(err);
-          });
+          })
     }
     handleDelete = (id) => {
         axios
@@ -117,7 +117,7 @@ class NoteList extends React.Component {
           })
           .catch(err => {
             console.log(err);
-          });
+          })
     }
     render() {
         console.log(this.props.notes)
