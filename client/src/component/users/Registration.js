@@ -12,7 +12,7 @@ class UserRegistration extends React.Component{
             //     alert(response.data.message)
             // }else{
             console.log(response.data);
-            this.props.history.push("/users/login");
+                this.props.history.push("/users/login");
             // }
           })
           .catch(err => {
