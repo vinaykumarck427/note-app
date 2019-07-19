@@ -79,7 +79,7 @@ class Form extends React.Component{
     //               //  category: nextProps.note.category.name
     //              }));
     //     }           
-    }
+    // }
     handleSelectedTag=(tag) => {
         this.setState((prevState) => ({ selectedTags: [...prevState.selectedTags,tag]}))
 
