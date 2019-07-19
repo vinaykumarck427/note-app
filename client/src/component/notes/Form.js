@@ -72,7 +72,7 @@ class Form extends React.Component{
     }
     componentWillReceiveProps(nextProps) {
         console.log(nextProps.note)
-        if(nextProps.note.category){
+        if(Object.keys(nextProps.note.category) > 0){
                  this.setState(() => ({
                    title: nextProps.note.title,
                    body: nextProps.note.body,
