@@ -12,6 +12,7 @@ class Form extends React.Component{
             title:'',
             body:'',
             category:'',
+            // categories: [],
             selectedTags:[]
         }
         this.handleTitle=this.handleTitle.bind(this)
@@ -56,9 +57,12 @@ class Form extends React.Component{
             }
         })
         .then(response => {
-                // this.setState(() => ({categories:response.data}))
+            // this.setState({categories:response.data})
                 this.props.dispatch(setCategories(response.data)
                 );
+        })
+        .catch(err => {
+          console.log(err)
         })
         axios.get('/tags', {
             headers: {
@@ -69,16 +73,21 @@ class Form extends React.Component{
                 this.props.dispatch(setTags(response.data))
                 // this.setState(() => ({ tags: response.data }))
             })
+            .catch(err => {
+              console.log(err)
+            })
     }
     componentWillReceiveProps(nextProps) {
-        console.log(nextProps.note)
-        if(Object.keys(nextProps.note.category) > 0){
+      console.log(nextProps.title)
+      console.log(nextProps.body)
+      console.log(nextProps.category)
+      if(nextProps){
                  this.setState(() => ({
-                   title: nextProps.note.title,
-                   body: nextProps.note.body,
-                  //  category: nextProps.note.category.name
-                 }));
-        }           
+                   title: nextProps.title,
+                   body: nextProps.body,
+                   category: nextProps.category
+                 }));   
+                }       
     }
     handleSelectedTag=(tag) => {
         this.setState((prevState) => ({ selectedTags: [...prevState.selectedTags,tag]}))
@@ -105,7 +114,7 @@ class Form extends React.Component{
                     onChange={this.handleSelect}
                   >
                     <option value="">select</option>
-                    {this.props.categories.map(category => (
+                    {this.state.categories.map(category => (
                       <option key={category._id} value={category._id}>
                         {category.name}
                       </option>

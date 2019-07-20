@@ -8,9 +8,9 @@ class UserRegistration extends React.Component{
         axios
           .post("/users/register", data)
           .then(response => {
-            // if(response.data.errors){
-            //     alert(response.data.message)
-            // }else{
+            if(response.data.errors){
+                alert(response.data.message)
+            }else{
             console.log(response.data);
                 this.props.history.push("/users/login");
             // }

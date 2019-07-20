@@ -26,13 +26,13 @@ class NoteEdit extends React.Component{
           .then(response => {
             console.log(response.data);
             this.props.dispatch(setNote(response.data));
-            // this.setState(() => ({selectedTags:response.data.tags}))
           })
           .catch(err => {
             console.log(err);
           });
     }
     handleSubmit(formData){
+      console.log(localStorage.getItem('userAuthToken'))
         axios
           .put(`/notes/${this.props.note._id}`, formData, {
             headers: {
@@ -43,25 +43,36 @@ class NoteEdit extends React.Component{
             if (response.data.hasOwnProperty("errors")) {
               console.log(response.data.errors);
             } else {
-              this.props.history.push(
-                `/notes/${this.props.match.params.id}`
-              );
+              this.props.history.push(`/notes/${this.props.match.params.id}`);
             }
           })
           .catch(err => {
             console.log(err);
           });
     }
+ 
     render(){
-        console.log(this.props.note)
-        return(
-            <div>
-                <h2>Edit the Note</h2>
-                <NoteForm note={this.props.note} handleSubmit={this.handleSubmit}/>
-                <Link className="Link" to={`/notes/${this.props.match.params.id}`}>Back</Link>
-            </div>
-            
-        )
+      console.log(this.props.note)
+        const title=this.props.note.title
+        const body=this.props.note.body
+        const category = this.props.note.category.name
+        return (
+          <div>
+            <h2>Edit the Note</h2>
+            <NoteForm
+              title={title}
+              body={body}
+              category={category}
+              handleSubmit={this.handleSubmit}
+            />
+            <Link
+              className="Link"
+              to={`/notes/${this.props.match.params.id}`}
+            >
+              Back
+            </Link>
+          </div>
+        );
     }
 }
 const mapStateToProps = function(state){

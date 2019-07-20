@@ -44,9 +44,9 @@ router.get('/:id', authenticationUser,(req, res) => {
         user:user._id
     }).populate('tags.tag', ['name']).populate('category', ['name'])
         .then((note) => {
-            // if(!note){
-            //     res.json([])
-            // }
+            if(!note){
+                res.json([])
+            }
             res.json(note)
         })
         .catch((err) => {

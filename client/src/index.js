@@ -31,7 +31,7 @@ if (localStorage.getItem('userAuthToken')) {
 
 const jsx = (
     <Provider store={store}>
-      `  <App />
+       <App />
     </Provider>
 )
 ReactDOM.render(jsx, document.getElementById('root'));
