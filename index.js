@@ -21,9 +21,9 @@ app.use('/categories', categoriesRouter)
 app.use('/tags', tagRouter)
 
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname + "/client/build/index.html"))
+	res.sendFile(path.join(__dirname + "/client/build/index.html"))
 })
 
 app.listen(port, () => {
-    console.log('listening on port', port)
+	console.log('listening on port', port)
 })

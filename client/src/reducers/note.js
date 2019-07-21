@@ -5,7 +5,7 @@ const noteReducer = (state=noteDefaultInitalValue, action) => {
     case 'SET_NOTE' :
       return {...action.payload}
     default: 
-    return {...state}
+      return {...state}
   }
 }
 export default noteReducer

@@ -6,18 +6,17 @@ import {Link} from 'react-router-dom'
 
 class Tags extends React.Component{
   componentDidMount(){
-    axios
-      .get("/tags", {
-        headers: {
-          "x-auth": localStorage.getItem("userAuthToken")
-        }
-      })
-      .then(response => {
-        this.props.dispatch(setTags(response.data));
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    axios.get("/tags", {
+      headers: {
+        "x-auth": localStorage.getItem("userAuthToken")
+      }
+    })
+    .then(response => {
+      this.props.dispatch(setTags(response.data));
+    })
+    .catch(err => {
+      console.log(err);
+    });
   }
   render(){
     return(

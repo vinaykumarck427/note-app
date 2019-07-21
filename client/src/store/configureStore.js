@@ -8,18 +8,18 @@ import tagsReducer from '../reducers/tags';
 import tagReducer from '../reducers/tag';
 
 const configureStore = () => {
-    const store = createStore(
-      combineReducers({
-        user: usersReducer,
-        notes: notesReducer,
-        categories: categoriesReducer,
-        note: noteReducer,
-        category: categoryReducer,
-        tags: tagsReducer,
-        tag: tagReducer
-      })
-    );
-    return store
+  const store = createStore(
+    combineReducers({
+      user: usersReducer,
+      notes: notesReducer,
+      categories: categoriesReducer,
+      note: noteReducer,
+      category: categoryReducer,
+      tags: tagsReducer,
+      tag: tagReducer
+    })
+  );
+  return store
 }
 
 export default configureStore

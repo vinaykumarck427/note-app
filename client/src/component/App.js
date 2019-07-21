@@ -17,88 +17,88 @@ import RegistrationUser from './users/Registration';
 
 
 class App extends React.Component{
-        render(){
-        return (
-          <BrowserRouter>
-            <div className="container">
-              {/* <h1>My Note App</h1> */}
+  render(){
+    return (
+      <BrowserRouter>
+        <div className="container">
+          {/* <h1>My Note App</h1> */}
 
-              {/* <Link to='/notes'>List Notes</Link><pre>
-                    <Link to='/categories'>List categories</Link></pre> */}
-              <ul className="list-group list-group-horizontal-xl">
-                {!_.isEmpty(localStorage.getItem("userAuthToken")) ? (
-                  <div>
-                    <li className="list-group-item">
-                      <Link to="/users/account">Account</Link>
-                    </li>
-                    <li className="list-group-item">
-                      <Link to="/users/logout">Logout</Link>
-                    </li>
-                  </div>
-                ) : (
-                  <div>
-                    <li className="list-group-item">
-                      <Link to="/users/register">Register</Link>
-                    </li>
-                    <li className="list-group-item">
-                      <Link to="/users/login">Login</Link>
-                    </li>
-                  </div>
-                )}
-              </ul>
+          {/* <Link to='/notes'>List Notes</Link><pre>
+                <Link to='/categories'>List categories</Link></pre> */}
+          <ul className="list-group list-group-horizontal-xl">
+            {!_.isEmpty(localStorage.getItem("userAuthToken")) ? (
+              <div>
+                <li className="list-group-item">
+                  <Link to="/users/account">Account</Link>
+                </li>
+                <li className="list-group-item">
+                  <Link to="/users/logout">Logout</Link>
+                </li>
+              </div>
+            ) : (
+              <div>
+                <li className="list-group-item">
+                  <Link to="/users/register">Register</Link>
+                </li>
+                <li className="list-group-item">
+                  <Link to="/users/login">Login</Link>
+                </li>
+              </div>
+            )}
+          </ul>
 
-              {/* Route Matcher */}
-              <Switch>
-                <Route
-                  path="/users/register"
-                  component={RegistrationUser}
-                  exact={true}
-                />
-                <Route path="/users/login" component={LoginUser} />
+          {/* Route Matcher */}
+          <Switch>
+            <Route
+              path="/users/register"
+              component={RegistrationUser}
+              exact={true}
+            />
+            <Route path="/users/login" component={LoginUser} />
 
-                <Route
-                  path="/users/account"
-                  component={Account}
-                  exact={true}
-                />
-                <Route path="/users/logout" component={LogoutUser} />
-                <Route exact path="/notes" component={NoteList} />
-                <Route exact path="/notes/new" component={AddNote} />
-                <Route
-                  exact
-                  path="/notes/edit/:id"
-                  component={NoteEdit}
-                />
-                <Route
-                  path="/notes/:id"
-                  component={NoteShow}
-                  exact={true}
-                />
-                <Route
-                  exact
-                  path="/categories"
-                  component={CategoriesList}
-                />
-                <Route
-                  exact
-                  path="/categories/new"
-                  component={AddCategory}
-                />
-                <Route
-                  path="/categories/edit/:id"
-                  component={CategoryEdit}
-                  exact={true}
-                />
-                <Route
-                  path="/categories/:id"
-                  component={ShowCategory}
-                  exact={true}
-                />
-              </Switch>
-            </div>
-          </BrowserRouter>
-        );
-    }
+            <Route
+              path="/users/account"
+              component={Account}
+              exact={true}
+            />
+            <Route path="/users/logout" component={LogoutUser} />
+            <Route exact path="/notes" component={NoteList} />
+            <Route exact path="/notes/new" component={AddNote} />
+            <Route
+              exact
+              path="/notes/edit/:id"
+              component={NoteEdit}
+            />
+            <Route
+              path="/notes/:id"
+              component={NoteShow}
+              exact={true}
+            />
+            <Route
+              exact
+              path="/categories"
+              component={CategoriesList}
+            />
+            <Route
+              exact
+              path="/categories/new"
+              component={AddCategory}
+            />
+            <Route
+              path="/categories/edit/:id"
+              component={CategoryEdit}
+              exact={true}
+            />
+            <Route
+              path="/categories/:id"
+              component={ShowCategory}
+              exact={true}
+            />
+          </Switch>
+        </div>
+      </BrowserRouter>
+    );
+  }
 }
 const mapStateToProps = (state) => {
     return {
