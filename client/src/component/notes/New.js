@@ -21,6 +21,7 @@ class AddNote extends React.Component{
       }
     })
     .then(response => {
+      console.log(response.data)
       if (response.data.hasOwnProperty("error")) {
         this.setState(() => ({ error: response.data }));
       } else {

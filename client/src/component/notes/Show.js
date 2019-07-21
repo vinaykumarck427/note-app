@@ -1,15 +1,10 @@
 import React from 'react'
 import axios from '../../config/config'
 import { Link } from 'react-router-dom'
+import {setNote} from '../../actions/note'
+import {connect} from 'react-redux'
  
 class NoteShow extends React.Component{
-	constructor(props){
-		super(props)
-		this.state ={
-			note: {}
-		}
-		this.handleRemove=this.handleRemove.bind(this)
-	}
 	componentDidMount(){
 		const id = this.props.match.params.id
 		axios.get(`/notes/${id}`, {
@@ -18,10 +13,11 @@ class NoteShow extends React.Component{
 			}
 		})
 		.then(response => {
-			this.setState(() => ({note:response.data}))
+			this.props.dispatch(setNote(response.data))
+			// this.setState(() => ({note:response.data}))
 		})
 	}
-	handleRemove(e){
+	handleRemove  = (e) => {
 		const id = this.props.match.params.id        
 		const confirm = window.confirm('Are you sure?')
 		if(confirm){
@@ -48,21 +44,22 @@ class NoteShow extends React.Component{
 		})
 		.then(response => {
 			console.log(response.data);
-			this.setState(() => ({ note: response.data }));
+			this.props.dispatch(setNote(response.data))
 		})
 		.catch(err => {
 			console.log(err);
 		})
 	}
 	render(){
+		console.log(this.props.note)
 		return(
 			<div>
-				{this.state.note.title && (<h2>{this.state.note.title}</h2>)}
-				{this.state.note.body && (<p>{this.state.note.body}</p>)}
-				{this.state.note.category && (<p>category-<Link to={`/categories/${this.state.note.category._id}`}>{this.state.note.category.name}</Link></p>)}
-				{this.state.note.tags && (<pre>tags - 
+				{this.props.note.title && (<h2>{this.props.note.title}</h2>)}
+				{this.props.note.body && (<p>{this.props.note.body}</p>)}
+				{this.props.note.category && (<p>category-<Link to={`/categories/${this.props.note.category._id}`}>{this.props.note.category.name}</Link></p>)}
+				{this.props.note.tags && (<pre>tags - 
 					<ul>
-						{this.state.note.tags.map(tag =>
+						{this.props.note.tags.map(tag =>
 							<li key={tag._id}><span>{tag.tag.name}<button onClick={() => {
 								this.handleRemoveTag(tag._id)
 						}}>X</button></span></li>)}
@@ -77,4 +74,9 @@ class NoteShow extends React.Component{
 		)
 	}
 }
-export default NoteShow
+const mapStateToProps = function(state){
+	return{
+		note:state.note
+	}
+}
+export default connect(mapStateToProps)(NoteShow)

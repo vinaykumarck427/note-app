@@ -8,12 +8,12 @@ import {connect} from 'react-redux'
 class Form extends React.Component{
   constructor(props){
     super(props)
-    this.state ={
-      title:'',
-      body:'',
-      category:'',
-      selectedTags:[]
-    }
+    this.state = {
+      title: "",
+      body: "",
+      category: "",
+      selectedTags: []
+    };
     this.handleTitle=this.handleTitle.bind(this)
     this.handleBody=this.handleBody.bind(this)
     this.handleSubmit=this.handleSubmit.bind(this)
@@ -73,23 +73,20 @@ class Form extends React.Component{
   })
   }
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps.title)
-    console.log(nextProps.body)
-    console.log(nextProps.category)
-    if(nextProps){
       this.setState(() => ({
         title: nextProps.title,
         body: nextProps.body,
         category: nextProps.category
-      }));   
-    }       
+      }));        
   }
   handleSelectedTag=(tag) => {
     this.setState((prevState) => ({ selectedTags: [...prevState.selectedTags,tag]}))
 
   }
   render(){
-    console.log(this.props)
+    // console.log(tags)
+    // const tags = this.props.tag.filter(t => t.tag._id)
+    // console.log(tags)
     return (
       <div>
         <form onSubmit={this.handleSubmit} className="form-row">
@@ -109,7 +106,7 @@ class Form extends React.Component{
                 onChange={this.handleSelect}
                 >
                 <option value="">select</option>
-                {this.state.categories.map(category => (
+                {this.props.categories.map(category => (
                   <option key={category._id} value={category._id}>
                     {category.name}
                   </option>
@@ -152,35 +149,32 @@ class Form extends React.Component{
             </div>
             <br />
             <br />
-            <lable
+            <label 
               htmlFor="tag"
               className="col-sm-2 col-form-label"
             >
               tags:
-            </lable>
+            </label>
             <br />
             <div className="col-sm-10">
-              {this.props.tags.map(tag => (
-                <div key={tag._id}>
-                  <input
-                    className="form-check-input"
-                    id="tag"
-                    type="checkbox"
-                    value={tag.name}
-                    onClick={() => {
-                      this.handleSelectedTag(tag);
-                    }}
-                  />
-                  <label className="form-check-label">
-                    {tag.name}
-                  </label>
-                  <br />
-                </div>
-              ))}
+              {this.props.tags.map(tag => 
+                <div key={tag._id}>               
+                      <input
+                        className="form-check-input"
+                        id="tag"
+                        type="checkbox"
+                        value={tag._id}
+                        onClick={() => {
+                          this.handleSelectedTag(tag);
+                        }}
+                      />
+                      <label className="form-check-label">
+                        {tag.name}
+                      </label>
+                      <br />
+                    </div>
+                )}
             </div>
-            <br />
-            <br />
-            <br />
             <input
               type="submit"
               value="SUBMIT"

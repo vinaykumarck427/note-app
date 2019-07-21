@@ -17,8 +17,8 @@ class ShowCategory extends React.Component{
       }
     })
     .then(response => {
-      this.dispatch(setCategory(response.data))
-      this.despatch(setNotes(response.data.notes));
+      this.props.dispatch(setCategory(response.data))
+      this.props.dispatch(setNotes(response.data.notes));
     })
     .catch(err => {
       console.log(err)

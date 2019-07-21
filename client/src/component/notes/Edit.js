@@ -4,6 +4,7 @@ import axios from '../../config/config'
 
 import { Link } from 'react-router-dom'
 import {setNote} from '../../actions/note'
+import { setCategory } from "../../actions/category";
 import {connect} from 'react-redux'
 
 class NoteEdit extends React.Component{
@@ -23,7 +24,15 @@ class NoteEdit extends React.Component{
       }
     })
     .then(response => {
-      console.log(response.data);
+      console.log(response.data)
+      axios.get(`/categories/${response.data.category._id}`, {
+        headers:{
+          'x-auth':localStorage.getItem('userAuthToken')
+        }
+      })
+      .then(response => {
+        this.props.dispatch(setCategory(response.data))
+      })
       this.props.dispatch(setNote(response.data));
     })
     .catch(err => {
@@ -50,10 +59,10 @@ class NoteEdit extends React.Component{
   }
  
   render(){
-    console.log(this.props.note)
+    console.log(this.props.note.tags)
     const title=this.props.note.title
     const body=this.props.note.body
-    const category = this.props.note.category.name
+    const category = this.props.category._id
     return (
       <div>
         <h2>Edit the Note</h2>
@@ -61,12 +70,10 @@ class NoteEdit extends React.Component{
           title={title}
           body={body}
           category={category}
+          tag={this.props.note.tags}
           handleSubmit={this.handleSubmit}
         />
-        <Link
-          className="Link"
-          to={`/notes/${this.props.match.params.id}`}
-        >
+        <Link className="Link" to={`/notes/${this.props.match.params.id}`}>
           Back
         </Link>
       </div>
@@ -75,7 +82,8 @@ class NoteEdit extends React.Component{
 }
 const mapStateToProps = function(state){
   return {
-    note: state.note
+    note: state.note,
+    category: state.category
   };
 }
 export default connect(mapStateToProps)(NoteEdit);
